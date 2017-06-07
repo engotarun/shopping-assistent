@@ -25,6 +25,27 @@ const wit = new Wit({
   logger: new log.Logger(log.INFO)
 });
 
+// Wit.ai actions
+const actions = {
+  send({ sessionId }, { text }) {
+    const recipientId = store.getFbId(sessionId);
+    if (recipientId) {
+      bot.sendMessage(recipientId, { text })
+        .catch((err) => {
+          console.error(
+            'Oops! An error occurred while forwarding the response to',
+            recipientId,
+            ':',
+            err.stack || err
+          );
+        });
+    } else {
+      console.error('Oops! Couldn\'t find user for session:', sessionId);
+      return Promise.resolve();
+    }
+  },
+};
+
 bot.on('error', (err) => {
   console.log(err.message)
 })
@@ -55,27 +76,6 @@ bot.on('message', (payload, reply) => {
   })
 
 })
-
-// Wit.ai actions
-const actions = {
-  send({ sessionId }, { text }) {
-    const recipientId = store.getFbId(sessionId);
-    if (recipientId) {
-      bot.sendMessage(recipientId, { text })
-        .catch((err) => {
-          console.error(
-            'Oops! An error occurred while forwarding the response to',
-            recipientId,
-            ':',
-            err.stack || err
-          );
-        });
-    } else {
-      console.error('Oops! Couldn\'t find user for session:', sessionId);
-      return Promise.resolve();
-    }
-  },
-};
 
 app.set('port', (process.env.PORT || 5000));
 
