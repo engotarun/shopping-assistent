@@ -22,4 +22,4 @@
 hs_err_pid*
 
 #nodejs modules
-node-server/node_modules/*
+node_modules/*
