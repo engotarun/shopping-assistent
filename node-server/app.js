@@ -19,12 +19,6 @@ let bot = new Bot({
   app_secret: fbPage.appSecret
 });
 
-const wit = new Wit({
-  accessToken: WIT_TOKEN,
-  actions,
-  logger: new log.Logger(log.INFO)
-});
-
 // Wit.ai actions
 const actions = {
   send({ sessionId }, { text }) {
@@ -45,6 +39,14 @@ const actions = {
     }
   },
 };
+
+const wit = new Wit({
+  accessToken: WIT_TOKEN,
+  actions,
+  logger: new log.Logger(log.INFO)
+});
+
+
 
 bot.on('error', (err) => {
   console.log(err.message)
