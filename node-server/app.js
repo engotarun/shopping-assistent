@@ -90,7 +90,7 @@ app.use(bodyParser.json())
 
 // Main route
 app.get('/', function(req, res) {
-  res.send('Hello world, I am a chat bot')
+  res.send('Hello world, I am a chat bot');
 })
 
 app.listen(app.get('port'), function() {
