@@ -14,7 +14,7 @@ import com.shopping.assistent.service.ConvService;
 
 @RestController
 @RequestMapping("/v1")
-public class ShoopingAssistentController {
+public class ConversationController {
 	
 	@Autowired
 	private ConvService convService;
